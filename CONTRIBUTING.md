@@ -14,8 +14,12 @@ Before sending a change, run:
 
 ```bash
 npm run check
-node --check public/app.js
+npm test
 ```
+
+`npm run check` syntax-checks the server and client. `npm test` spawns the
+server and exercises the HTTP surface, including the CSRF and DNS-rebinding
+guards.
 
 ## Pull Requests
 

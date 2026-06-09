@@ -18,6 +18,7 @@
   "scripts": {
     "dev": "node server.js",
     "start": "node server.js",
-    "check": "node --check server.js"
+    "check": "node --check server.js && node --check public/app.js",
+    "test": "node --test"
   }
 }

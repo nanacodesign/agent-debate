@@ -2,10 +2,21 @@
 node_modules/
 .playwright-mcp/
 
+# Local agent/editor config and preview launch configs.
+.claude/
+
 # Local debate output and private per-machine settings.
 runs/*.md
 !runs/.gitkeep
 agent-debate.config.json
+.env
+
+# Personal Codex for OSS application draft (kept locally, not published).
+docs/codex-for-oss-application.md
+
+# Internal agent instructions and local experiments (kept local, not published).
+AGENTS.md
+experiments/
 
 # Local macOS launcher bundle generated for one machine.
 macos/Agent Debate.app/

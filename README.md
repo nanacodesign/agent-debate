@@ -12,7 +12,7 @@ The app is designed for maintainers who want a fast second opinion before changi
 - Connect your own CLI agents from the UI or `agent-debate.config.json`.
 - Keep provider authentication inside each official CLI.
 - Save local Markdown transcripts under `runs/`.
-- Use a nanaOS-inspired app shell built with plain HTML, CSS, and Node.js.
+- Run a self-contained UI (plain HTML, CSS, and Node.js) that works on a fresh clone and can optionally be themed with your own design system.
 
 ## Requirements
 
@@ -86,7 +86,14 @@ AGENT_DEBATE_HOST=127.0.0.1
 AGENT_DEBATE_PORT=4177
 AGENT_DEBATE_DEFAULT_PROJECT_PATH=/path/to/project
 AGENT_DEBATE_EXTRA_PATHS=/custom/bin:/another/bin
+NANAOS_DESIGN_SYSTEM_PATH=/path/to/design-system
 ```
+
+## Theming
+
+Agent Debate ships with a built-in, self-contained theme (`public/theme.css`, plus open-licensed Geist fonts and a small Material Symbols subset under `public/vendor/`), so the UI works out of the box with no external assets.
+
+If you maintain your own design system, point `NANAOS_DESIGN_SYSTEM_PATH` at its build directory. Matching CSS, fonts, and icons are then served under `/nanaos/` and override the built-in theme. The override is layered with CSS cascade layers so a mounted design system always wins locally, while a fresh clone falls back to the neutral built-in theme automatically.
 
 ## Local Files
 
@@ -97,6 +104,8 @@ AGENT_DEBATE_EXTRA_PATHS=/custom/bin:/another/bin
 ## Safety Notes
 
 Agent Debate executes local commands that you configure. Only connect CLIs you trust, and review the project path before starting a debate. The app binds to `127.0.0.1` by default so it is not exposed on your network unless you opt into another host.
+
+Because agents run as local shell commands, exposing the server to a network (for example by setting `AGENT_DEBATE_HOST` to `0.0.0.0`) effectively offers unauthenticated code execution to anyone who can reach it. Keep the default host unless you fully trust the network. State-changing requests from other web origins are rejected to protect against cross-site (CSRF) attacks. See [SECURITY.md](SECURITY.md) for details.
 
 ## OpenAI Codex for OSS
 
