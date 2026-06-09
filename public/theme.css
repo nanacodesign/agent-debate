@@ -1,0 +1,462 @@
+/*
+ * Agent Debate — built-in neutral theme (fallback layer)
+ * ------------------------------------------------------------------
+ * This file makes the app fully self-contained when no external design
+ * system is mounted. It defines the design tokens the app consumes and a
+ * small, deliberately generic set of component styles.
+ *
+ * Load order (see index.html / run viewer):
+ *   theme.css  ->  /nanaos/dist/nanaos.css (optional)  ->  styles.css
+ *
+ * When a design system is mounted at NANAOS_DESIGN_SYSTEM_PATH it is served
+ * at /nanaos/ and overrides everything here. Every component rule below is
+ * wrapped in :where() (specificity 0) precisely so that the mounted design
+ * system — and the app's own styles.css — always win. When nothing is
+ * mounted (e.g. a fresh clone), this neutral theme keeps the UI coherent.
+ *
+ * Bundled fonts are open-licensed (see vendor/fonts, vendor/icons).
+ */
+
+/* Declare our layer FIRST so it is the lowest-priority cascade layer. A mounted
+ * design system (nanaos.css uses @layer nanaos.*) is declared afterwards and
+ * therefore wins; the app's own styles.css is unlayered and wins over all
+ * layers. @font-face stays outside the layer (font registration is global). */
+@layer agent-debate-fallback;
+
+/* ---------------------------------------------------------------- Fonts */
+
+@font-face {
+  font-family: "Geist";
+  src: url("/vendor/fonts/GeistVF.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/vendor/fonts/GeistMonoVF.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Material Symbols Outlined";
+  src: url("/vendor/icons/material-symbols-outlined.subset.woff2") format("woff2");
+  font-weight: 100 700;
+  font-style: normal;
+  font-display: block;
+}
+
+/* --------------------------------------------------------------- Tokens */
+/* From here down everything lives in the agent-debate-fallback layer. */
+@layer agent-debate-fallback {
+
+:root {
+  color-scheme: light dark;
+
+  /* Type */
+  --font-family-geist: "Geist", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-family-geist-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --font-size-12: 12px;
+  --font-size-14: 14px;
+  --font-size-16: 16px;
+  --font-size-20: 20px;
+  --font-weight-400: 400;
+  --font-weight-700: 700;
+  --font-weight-800: 800;
+  --line-height-10: 1;
+  --line-height-12: 1.2;
+  --line-height-14: 1.4;
+  --line-height-16: 1.6;
+
+  /* Spacing */
+  --spacing-4: 4px;
+  --spacing-6: 6px;
+  --spacing-8: 8px;
+  --spacing-10: 10px;
+  --spacing-12: 12px;
+  --spacing-14: 14px;
+  --spacing-16: 16px;
+  --spacing-20: 20px;
+  --spacing-24: 24px;
+  --spacing-32: 32px;
+
+  /* Dimensions */
+  --size-18: 18px;
+  --size-20: 20px;
+  --dimension-20: 20px;
+  --layout-72: 72px;
+  --target-size-44: 44px;
+
+  /* Radius & borders */
+  --border-radius-6: 6px;
+  --border-radius-8: 8px;
+  --border-radius-20: 20px;
+  --border-radius-800: 999px;
+  --border-width-1: 1px;
+  --border-width-2: 2px;
+
+  /* Surfaces & text (neutral palette, light/dark aware) */
+  --background-default: light-dark(#ffffff, #1b1b1d);
+  --background-dim1: light-dark(#f6f6f4, #161618);
+  --background-dim2: light-dark(#ececea, #242427);
+  --foreground-default: light-dark(#1c1c1e, #f2f2f3);
+  --foreground-dim1: light-dark(#3b3b3f, #d2d2d6);
+  --foreground-dim2: light-dark(#6b6b72, #9a9aa2);
+  --foreground-dim3: light-dark(#8c8c93, #6f6f77);
+  --foreground-inverse: light-dark(#ffffff, #1b1b1d);
+
+  /* Actions */
+  --action-link-fg: light-dark(#1a56db, #7aa8ff);
+  --action-primary-bg: light-dark(#1f1f23, #ededf0);
+  --action-primary-bg-hover: light-dark(#000000, #ffffff);
+
+  /* Buttons */
+  --button-background: transparent;
+  --button-foreground: var(--foreground-default);
+  --button-border-color: light-dark(rgba(0, 0, 0, 0.24), rgba(255, 255, 255, 0.26));
+  --button-border-width: var(--border-width-1);
+  --button-hover-background: light-dark(rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.08));
+
+  /* States */
+  --state-hover-background: light-dark(rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.08));
+  --state-disabled-background: light-dark(rgba(0, 0, 0, 0.04), rgba(255, 255, 255, 0.05));
+  --state-disabled-foreground: light-dark(rgba(0, 0, 0, 0.38), rgba(255, 255, 255, 0.38));
+  --state-focus: var(--action-link-fg);
+  --state-focus-background: light-dark(rgba(26, 86, 219, 0.12), rgba(122, 168, 255, 0.18));
+
+  /* Status */
+  --status-success: light-dark(#1a7f37, #3fb950);
+  --status-success-container: light-dark(#dafbe1, #16331f);
+  --status-error: light-dark(#cf222e, #f85149);
+  --status-error-container: light-dark(#ffebe9, #3a1b1b);
+  --status-warning-fg: light-dark(#9a6700, #e3b341);
+  --status-warning-container: light-dark(#fff8c5, #3a2f10);
+
+  /* Focus ring */
+  --focus-ring-color: var(--action-link-fg);
+  --focus-ring-width: 2px;
+  --focus-ring-style: solid;
+  --focus-ring-offset: 2px;
+
+  /* Elevation */
+  --elevation-4: 0 1px 2px rgba(0, 0, 0, 0.08), 0 6px 16px rgba(0, 0, 0, 0.08);
+  --elevation-6: 0 2px 4px rgba(0, 0, 0, 0.1), 0 12px 28px rgba(0, 0, 0, 0.12);
+
+  /* Motion */
+  --enter-quick: 150ms ease;
+}
+
+/* ---------------------------------------------------------------- Icons */
+
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+  font-family: "Material Symbols Outlined";
+  font-size: 1.25em;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  color: currentColor;
+  font-feature-settings: "liga";
+  -webkit-font-feature-settings: "liga";
+  font-variation-settings: "FILL" 0, "wght" 600, "GRAD" 0, "opsz" 24;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ----------------------------------------------------------- Components */
+/* Wrapped in :where() so any mounted design system / styles.css wins. */
+
+:where(.button) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-8);
+  min-height: 36px;
+  padding: 0 var(--spacing-14);
+  border: var(--button-border-width) solid var(--button-border-color);
+  border-radius: var(--border-radius-8);
+  background: var(--button-background);
+  color: var(--button-foreground);
+  font-family: inherit;
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-700);
+  line-height: var(--line-height-10);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background var(--enter-quick), border-color var(--enter-quick), color var(--enter-quick);
+}
+
+:where(.button--round, .button--circle) {
+  border-radius: var(--border-radius-800);
+}
+
+:where(.button--icon-only) {
+  width: 36px;
+  min-width: 36px;
+  padding: 0;
+}
+
+:where(.button--filled) {
+  background: var(--action-primary-bg);
+  color: var(--foreground-inverse);
+  border-color: transparent;
+}
+
+:where(.button--outlined) {
+  background: transparent;
+  border-color: var(--button-border-color);
+}
+
+:where(.button--plain) {
+  background: transparent;
+  border-color: transparent;
+}
+
+:where(.button:hover:not(:disabled)) {
+  background: var(--button-hover-background);
+}
+
+:where(.button--filled:hover:not(:disabled)) {
+  background: var(--action-primary-bg-hover);
+}
+
+:where(.button:focus-visible) {
+  outline: var(--focus-ring-width) var(--focus-ring-style) var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+:where(.button:disabled) {
+  background: var(--state-disabled-background);
+  color: var(--state-disabled-foreground);
+  border-color: transparent;
+  cursor: not-allowed;
+}
+
+:where(.button__icon) {
+  display: inline-flex;
+  flex: 0 0 auto;
+}
+
+:where(.button__label) {
+  display: inline-block;
+}
+
+:where(.tag) {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  padding: 2px var(--spacing-8);
+  border-radius: var(--border-radius-800);
+  background: var(--background-dim2);
+  color: var(--foreground-dim1);
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-700);
+  line-height: var(--line-height-12);
+}
+
+:where(.tag--rectangle) {
+  border-radius: var(--border-radius-6);
+}
+
+:where(.input-field, .textarea-field, .switch-field) {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+  min-width: 0;
+}
+
+:where(.switch-field) {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-12);
+}
+
+:where(.input-label, .textarea-label) {
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-700);
+  color: var(--foreground-dim2);
+}
+
+:where(.input, .textarea, .select) {
+  width: 100%;
+  border: var(--border-width-1) solid var(--button-border-color);
+  border-radius: var(--border-radius-8);
+  background: var(--background-default);
+  color: var(--foreground-default);
+  font: inherit;
+  font-size: var(--font-size-14);
+}
+
+:where(.input, .select) {
+  min-height: 36px;
+  padding: 0 var(--spacing-12);
+}
+
+:where(.input--round) {
+  border-radius: var(--border-radius-800);
+}
+
+:where(.textarea) {
+  min-height: 88px;
+  padding: var(--spacing-10) var(--spacing-12);
+  line-height: var(--line-height-14);
+  resize: vertical;
+}
+
+:where(.input:focus-visible, .textarea:focus-visible, .select:focus-visible) {
+  outline: none;
+  border-color: var(--state-focus);
+  box-shadow: 0 0 0 3px var(--state-focus-background);
+}
+
+:where(.input-control) {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+:where(.input-icon) {
+  display: inline-flex;
+  color: var(--foreground-dim2);
+}
+
+:where(.chip) {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-6);
+  padding: var(--spacing-4) var(--spacing-10);
+  border-radius: var(--border-radius-800);
+  background: var(--background-dim2);
+  color: var(--foreground-default);
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-700);
+}
+
+:where(.chip--outlined) {
+  background: transparent;
+  border: var(--border-width-1) solid var(--button-border-color);
+}
+
+:where(.chip__end-icon, .chip-remove) {
+  display: inline-flex;
+  color: var(--foreground-dim2);
+  cursor: pointer;
+}
+
+:where(.card) {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+  padding: var(--spacing-16);
+  border: var(--border-width-1) solid var(--app-line, rgba(127, 127, 127, 0.2));
+  border-radius: var(--border-radius-8);
+  background: var(--background-default);
+}
+
+:where(.card__main) {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+}
+
+:where(.card__identity) {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  min-width: 0;
+}
+
+:where(.card__copy) {
+  color: var(--foreground-dim2);
+  font-size: var(--font-size-12);
+}
+
+:where(.card__meta) {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+}
+
+:where(.card__status-icon) {
+  display: inline-flex;
+}
+
+:where(.list) {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+:where(.panel) {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  padding: var(--spacing-16);
+  border: var(--border-width-1) solid var(--app-line, rgba(127, 127, 127, 0.2));
+  border-radius: var(--border-radius-8);
+  background: var(--app-panel, var(--background-default));
+  box-shadow: var(--app-shadow, var(--elevation-4));
+}
+
+:where(.panel-head) {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-12);
+}
+
+:where(.title-body) {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  min-width: 0;
+}
+
+:where(.title-body__title) {
+  margin: 0;
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-800);
+  line-height: var(--line-height-12);
+}
+
+:where(.title-body__body) {
+  margin: 0;
+  color: var(--foreground-dim2);
+  font-size: var(--font-size-12);
+  line-height: var(--line-height-14);
+}
+
+:where(.button-row) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-8);
+}
+
+:where(.visually-hidden),
+:where(.input-label--visually-hidden) {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+} /* end @layer agent-debate-fallback */

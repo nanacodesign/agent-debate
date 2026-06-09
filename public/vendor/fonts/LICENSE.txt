@@ -1,0 +1,16 @@
+Geist & Geist Mono
+==================
+
+Bundled font files:
+- GeistVF.woff2
+- GeistMonoVF.woff2
+
+Geist and Geist Mono are designed by Vercel and licensed under the
+SIL Open Font License, Version 1.1 (OFL-1.1).
+
+Upstream: https://github.com/vercel/geist-font
+License:  https://github.com/vercel/geist-font/blob/main/LICENSE.TXT
+
+These files are redistributed here unmodified to make Agent Debate's built-in
+theme self-contained. The OFL-1.1 permits bundling and redistribution; the
+fonts may not be sold on their own.

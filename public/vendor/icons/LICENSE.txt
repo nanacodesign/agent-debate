@@ -1,0 +1,17 @@
+Material Symbols (Outlined)
+===========================
+
+Bundled font file:
+- material-symbols-outlined.subset.woff2
+
+This is a SUBSET of Google's Material Symbols Outlined variable font, reduced to
+only the icon glyphs Agent Debate uses (close, edit, refresh, settings, check,
+done, error, stop, folder_open) plus their ligature rules.
+
+Material Symbols are licensed under the Apache License, Version 2.0.
+
+Upstream: https://github.com/google/material-design-icons
+License:  https://www.apache.org/licenses/LICENSE-2.0
+
+The subset is generated from the upstream variable font with fontTools; it is a
+mechanical reduction and remains under the Apache-2.0 license.
