@@ -11,12 +11,11 @@ runs/*.md
 agent-debate.config.json
 .env
 
-# Personal Codex for OSS application draft (kept locally, not published).
-docs/codex-for-oss-application.md
-
-# Internal agent instructions and local experiments (kept local, not published).
+# Internal agent instructions, local experiments, and working notes
+# (kept local, not published).
 AGENTS.md
 experiments/
+scratch/
 
 # Local macOS launcher bundle generated for one machine.
 macos/Agent Debate.app/

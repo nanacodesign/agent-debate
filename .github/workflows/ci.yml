@@ -14,8 +14,6 @@ jobs:
         with:
           node-version: "20"
       - name: Syntax check
-        run: |
-          node --check server.js
-          node --check public/app.js
+        run: npm run check
       - name: Tests
         run: npm test

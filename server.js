@@ -1943,7 +1943,9 @@ function serveStatic(req, res) {
     return;
   }
 
-  if (!existsSync(fullPath)) {
+  // Directories must 404: piping a directory read stream would emit an
+  // unhandled EISDIR error and crash the whole server.
+  if (!existsSync(fullPath) || !statSync(fullPath).isFile()) {
     sendJson(res, 404, { error: "Not found." });
     return;
   }
@@ -1968,7 +1970,9 @@ function serveStatic(req, res) {
     "Content-Type": mimeTypes[ext] || "application/octet-stream",
     "Cache-Control": "no-store",
   });
-  createReadStream(fullPath).pipe(res);
+  const stream = createReadStream(fullPath);
+  stream.on("error", () => res.destroy());
+  stream.pipe(res);
 }
 
 function serveDesignSystem(req, res) {
@@ -1991,7 +1995,8 @@ function serveDesignSystem(req, res) {
     return;
   }
 
-  if (!existsSync(fullPath)) {
+  // Same directory guard as serveStatic: piping a directory would crash.
+  if (!existsSync(fullPath) || !statSync(fullPath).isFile()) {
     sendJson(res, 404, {
       error: "nanaOS design-system asset not found.",
       designSystemPath: designSystemDir,
@@ -2004,7 +2009,9 @@ function serveDesignSystem(req, res) {
     "Content-Type": mimeTypes[ext] || "application/octet-stream",
     "Cache-Control": "no-store",
   });
-  createReadStream(fullPath).pipe(res);
+  const stream = createReadStream(fullPath);
+  stream.on("error", () => res.destroy());
+  stream.pipe(res);
 }
 
 createServer((req, res) => {

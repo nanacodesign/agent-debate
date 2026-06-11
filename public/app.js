@@ -754,7 +754,7 @@ async function fetchGithubStars() {
   const starCountEl = document.querySelector("#starCount");
   if (!starCountEl) return;
   try {
-    const res = await fetch("https://api.github.com/repos/nanacodesign/agent-debate");
+    const res = await fetch("https://api.github.com/repos/nanacodesign/nanaOS-agent-debate");
     if (res.ok) {
       const data = await res.json();
       if (data && typeof data.stargazers_count === "number") {

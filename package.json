@@ -10,12 +10,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nanacodesign/agent-debate.git"
+    "url": "git+https://github.com/nanacodesign/nanaOS-agent-debate.git"
   },
   "bugs": {
-    "url": "https://github.com/nanacodesign/agent-debate/issues"
+    "url": "https://github.com/nanacodesign/nanaOS-agent-debate/issues"
   },
-  "homepage": "https://github.com/nanacodesign/agent-debate#readme",
+  "homepage": "https://github.com/nanacodesign/nanaOS-agent-debate#readme",
   "engines": {
     "node": ">=20"
   },

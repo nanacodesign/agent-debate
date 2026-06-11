@@ -93,3 +93,13 @@ test("the built-in theme is served (self-contained UI)", async () => {
   const res = await request("/theme.css");
   assert.equal(res.status, 200);
 });
+
+test("requesting a directory returns 404 and does not crash the server", async () => {
+  const res = await request("/vendor");
+  assert.equal(res.status, 404);
+
+  // The server must survive the directory request (an unguarded directory
+  // read stream would crash the whole process).
+  const after = await request("/api/status");
+  assert.equal(after.status, 200);
+});

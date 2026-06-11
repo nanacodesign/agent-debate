@@ -1,6 +1,6 @@
 # nanaOS Agent Debate
 
-[![GitHub stars](https://img.shields.io/github/stars/nanacodesign/agent-debate.svg?style=social)](https://github.com/nanacodesign/agent-debate/stargazers)
+[![GitHub stars](https://img.shields.io/github/stars/nanacodesign/nanaOS-agent-debate.svg?style=social)](https://github.com/nanacodesign/nanaOS-agent-debate/stargazers)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-nana-blue.svg?logo=linkedin&style=flat-square)](https://www.linkedin.com/in/nanacodesign/)
 [![Website](https://img.shields.io/badge/Website-nanacodesign.com-brightgreen.svg?style=flat-square)](https://nanacodesign.com/)
 
@@ -29,8 +29,8 @@ nanaOS Agent Debate never stores API keys. CLI agents authenticate through their
 ## Quick Start
 
 ```bash
-git clone https://github.com/nanacodesign/agent-debate.git
-cd agent-debate
+git clone https://github.com/nanacodesign/nanaOS-agent-debate.git
+cd nanaOS-agent-debate
 cp agent-debate.config.example.json agent-debate.config.json
 npm run dev
 ```
@@ -157,6 +157,13 @@ This project is being prepared as an open-source local tool for maintainers and 
 **nana**
 - **Website**: [https://nanacodesign.com/](https://nanacodesign.com/)
 - **LinkedIn**: [https://www.linkedin.com/in/nanacodesign/](https://www.linkedin.com/in/nanacodesign/)
+
+## Contributors
+
+- **nana** (Creator & Lead Developer)
+- **Gemini** (AI Pair Programmer - UI & Rebranding)
+- **Claude** (AI Collaborator)
+- **Codex** (AI Collaborator - Agent Integration)
 
 ## License
 
